@@ -46,6 +46,11 @@ exports.createRequest = function(req, res, next) {
 				new errors.InvalidContentError("Expects 'application/json'")
 			);
 	}
+	if (req.params.approved == 1 ) {
+			return next(
+				new errors.InvalidContentError("Wow! You are awesome you got it.")
+			);
+	}
     var requestModel = new Request(req.body);
     requestModel.save(function(err, request) {
         if (err){
