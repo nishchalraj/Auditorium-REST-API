@@ -5,8 +5,7 @@
 <p>
 Get a token for testing(Privileges : Low)</p>
 curl -X POST http://audi-defender.c9users.io/auth  -d '{"user" : "let", "pass" : "1234"}'  -H  "Content-type: application/json"</p>
-
-
+<br>
 <p>Instructions:-<br>
 Please send Content-type: application/json header in every POST or PUT request</p>
 Use "x-auth-token" in header for all authenticated requests</p>
@@ -19,27 +18,23 @@ POST /auth/login<br>
  user: { type: String }<br>
  pass: { type: String }<br>
 }</p>
-
-<p>Below all following Requests required x-auth-token in headers<br>
+<br><p>Below all following Requests required x-auth-token in headers<br>
 /**<br>
  * User change password<br>
  */<br>
- 
+
 PUT /changepass<br>
 {<br>
 currpass: { type: String }<br>
 newpass1: { type: String }<br>
 newpass2: { type: String }<br>
 }</p>
-
-<p>/**<br>
+<br><p>/**<br>
  * Users<br>
  */<br>
 GET /alluser<br>
-
-GET /listuser<br>
-
-POST /user<br>
+<br>GET /listuser<br>
+<br>POST /user<br>
 {<br>
  name: { type: String }<br>
  user: { type: String }<br>
@@ -47,34 +42,25 @@ POST /user<br>
  token: { type: String }<br>
  isAdmin: { type: Boolean }<br>
 }<br>
-
-DELETE /user/:id<br>
-
-GET user/:id</p>
-
-<p>/**<br>
+<br>DELETE /user/:id<br>
+<br>GET user/:id</p>
+<br><p>/**<br>
  * Audi<br>
  */<br>
 GET /listaudi<br>
-
-POST /audi<br>
+<br>POST /audi<br>
 {<br>
  audi: { type: String }<br>
  }<br>
 GET /audi/:id/requests<br>
-
-DELETE /audi/:id<br>
-
-GET /audi/:id</p>
-
-<p>/**<br>
+<br><DELETE /audi/:id<br>
+<br>GET /audi/:id</p>
+<br><p>/**<br>
  * Requests<br>
  */<br>
 GET /allreq</p>
-
-<p>GET /listreq</p>
-
-<p>POST /request<br>
+<br><p>GET /listreq</p>
+<br><p>POST /request<br>
 {<br>
  name: { type: String }<br>
  dept: { type: String }<br>
@@ -86,16 +72,11 @@ GET /allreq</p>
  stime: { type: Number }<br>
  etime: { type: Number }<br>
 }</p>
-
-<p>PUT /request/:id</p>
-
-<p>DELETE /request/:id</p>
-
-<p>GET /request/:id</p>
-
-<p>GET /request/delold</p>
-
-<p>/**<br>
+<br><p>PUT /request/:id</p>
+<br><p>DELETE /request/:id</p>
+<br><p>GET /request/:id</p>
+<br><p>GET /request/delold</p>
+<br><p>/**<br>
  * Logout<br>
  */<br>
 GET /logout<br>
