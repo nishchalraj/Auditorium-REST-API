@@ -46,7 +46,7 @@ exports.createRequest = function(req, res, next) {
 				new errors.InvalidContentError("Expects 'application/json'")
 			);
 	}
-	if (req.params.approved == 1 ) {
+	if (req.params.approved == 1 && !req.Admin ) {
 			return next(
 				new errors.InvalidContentError("Wow! You are awesome you got it.")
 			);
