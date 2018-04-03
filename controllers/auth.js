@@ -1,11 +1,9 @@
 var jwt = require("jsonwebtoken"),
     errors = require('restify-errors'),
-    config = require('../config'),
     User = require('../models/user'),
     fs = require("fs");
     
 exports.authUser = function(req, res,next) {
-  console.log(req);
     if (!req.is('application/json')) {
 			return next(
 				new errors.InvalidContentError("Expects 'application/json'")
