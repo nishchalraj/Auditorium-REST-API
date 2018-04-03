@@ -1,90 +1,85 @@
-Instructions:-
-Please send "Content-type: application/json" header in every POST or PUT request
-Use "x-auth-token" header in authenticated request
+<p>Instructions:-<br>
+Please send Content-type: application/json header in every POST or PUT request</p>
 
-/**
-  * Auth Endpoint
-  */
-POST /auth/login
-{
-  user: { type: String  }
-  pass: { type: String  }
-}
+<p>
+/**<br>
+ * Auth Endpoint<br>
+ */<br>
+POST /auth/login<br>
+{<br>
+ user: { type: String }<br>
+ pass: { type: String }<br>
+}</p>
 
-Below all following Requests required x-auth-token in headers
-/**
-  * User change password
-  */
-PUT /changepass
-{
-currpass: { type: String  },
-newpass1: { type: String  },
-newpass2: { type: String  },
-}
+<p>Below all following Requests required x-auth-token in headers<br>
+/**<br>
+ * User change password<br>
+ */<br>
+PUT /changepass<br>
+{<br>
+currpass: { type: String }<br>
+newpass1: { type: String }<br>
+newpass2: { type: String }<br>
+}</p>
 
-/**
-  * Users
-  */
-GET /alluser
-    /listuser
-POST /user
-{
-  name: { type: String  },
-  user: { type: String  },
-  pass: { type: String  },
-  token: { type: String },
-  isAdmin: { type: Boolean },
-}
+<p>/**<br>
+ * Users<br>
+ */<br>
+GET /alluser<br>
+ /listuser<br>
+POST /user<br>
+{<br>
+ name: { type: String }<br>
+ user: { type: String }<br>
+ pass: { type: String }<br>
+ token: { type: String }<br>
+ isAdmin: { type: Boolean }<br>
+}<br>
+DELETE /user/:id<br>
+GET user/:id</p>
 
-DELETE /user/:id
+<p>/**<br>
+ * Audi<br>
+ */<br>
+GET /listaudi<br>
+POST /audi<br>
+{<br>
+ audi: { type: String }<br>
+ }<br>
+GET /audi/:id/requests<br>
+DELETE /audi/:id<br>
+GET /audi/:id</p>
 
-GET user/:id
+<p>/**<br>
+ * Requests<br>
+ */<br>
+GET /allreq</p>
 
-/**
-  * Audi
-  */
-GET /listaudi
+<p>GET /listreq</p>
 
-POST /audi
-{
-  audi: { type: String }
-}
+<p>POST /request<br>
+{<br>
+ name: { type: String }<br>
+ dept: { type: String }<br>
+ audi_id: { type: Number }<br>
+ reason: { type: String }<br>
+ created_by: { type: String}<br>
+ approved: { type: Boolean }<br>
+ date: { type: Date }<br>
+ stime: { type: Number }<br>
+ etime: { type: Number }<br>
+}</p>
 
-GET /audi/:id/requests
+<p>PUT /request/:id</p>
 
-DELETE /audi/:id
+<p>DELETE /request/:id</p>
 
-GET /audi/:id
+<p>GET /request/:id</p>
 
-/**
-  * Requests
-  */
-GET /allreq
+<p>GET /request/delold</p>
 
-GET /listreq
-
-POST /request
-{
-  name: { type: String  },
-  dept: { type: String  },
-  audi_id: { type: Number },
-  reason: { type: String },
-  created_by: { type: String},
-  approved: { type: Boolean },
-  date: { type: Date },
-  stime: { type: Number  },
-  etime: { type: Number  },
-}
-
-PUT /request/:id
-
-DELETE /request/:id
-
-GET /request/:id
-
-GET /request/delold
-
-/**
-  * Logout
-  */
-GET /logout
+<p>/**<br>
+ * Logout<br>
+ */<br>
+GET /logout<br>
+</p>
