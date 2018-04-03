@@ -146,7 +146,7 @@ server.del("/user/:id" ,verifyToken, user.deleteUser);
 server.get({path: "/user/:id"} ,verifyToken , user.viewUser);
 
 /**
-  * Audi
+  * Audis
   */ 
 server.get("/listaudi" , audi.listAudi);
 server.post("/audi" ,verifyToken , audi.createAudi);

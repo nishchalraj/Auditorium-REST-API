@@ -134,7 +134,7 @@ exports.delOldRequests  = function(req, res, next) {
 				new errors.UnauthorizedError("You are not admin")
 			);
     }
-    Request.deleteMany({ approved : 1 , date: { $it: "DATE HERE" } }, function(err, request) {
+    Request.deleteMany({ approved : 1 , date: { $it: Date.now } }, function(err, request) {
         if (err){
         return next(
 				new errors.InternalServerError("We got errors") //500
