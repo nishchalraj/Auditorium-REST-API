@@ -24,6 +24,7 @@ POST /auth/login<br>
 /**<br>
  * User change password<br>
  */<br>
+ 
 PUT /changepass<br>
 {<br>
 currpass: { type: String }<br>
@@ -35,7 +36,9 @@ newpass2: { type: String }<br>
  * Users<br>
  */<br>
 GET /alluser<br>
- /listuser<br>
+
+GET /listuser<br>
+
 POST /user<br>
 {<br>
  name: { type: String }<br>
@@ -44,19 +47,24 @@ POST /user<br>
  token: { type: String }<br>
  isAdmin: { type: Boolean }<br>
 }<br>
+
 DELETE /user/:id<br>
+
 GET user/:id</p>
 
 <p>/**<br>
  * Audi<br>
  */<br>
 GET /listaudi<br>
+
 POST /audi<br>
 {<br>
  audi: { type: String }<br>
  }<br>
 GET /audi/:id/requests<br>
+
 DELETE /audi/:id<br>
+
 GET /audi/:id</p>
 
 <p>/**<br>
