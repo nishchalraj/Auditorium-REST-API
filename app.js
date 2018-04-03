@@ -108,10 +108,21 @@ var audi = require('./controllers/audi'),
     
     
 
-//TEST
-server.get("/", function(req, res) {
- console.log("API");
- res.send('Hello! This is an API');
+/**
+  * Landing Page
+  */
+server.get('/', function indexHTML(req, res, next) {
+    fs.readFile(__dirname + '/index.html', function (err, data) {
+        if (err) {
+            next(err);
+            return;
+        }
+
+        res.setHeader('Content-Type', 'text/html');
+        res.writeHead(200);
+        res.end(data);
+        next();
+    });
 });
 
 /**
@@ -122,7 +133,7 @@ server.post("/auth/login",auth.authUser);
 /**
   * User change password
   */
-server.post("/changepass",verifyToken, chpasswd.pass);
+server.put("/changepass",verifyToken, chpasswd.pass);
  
 /**
   * Users
@@ -154,7 +165,7 @@ server.post("/request",verifyToken, request.createRequest);
 server.put("/request/:id",verifyToken, request.approveRequest);
 server.del("/request/:id",verifyToken, request.deleteRequest);
 server.get({path: "/request/:id"},verifyToken, request.viewRequest);
-server.get("/request/delold",verifyToken, request.delOldRequests);
+//server.get("/request/delold",verifyToken, request.delOldRequests);
  
 /**
   * Logout

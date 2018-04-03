@@ -1,0 +1,90 @@
+Instructions:-
+Please send "Content-type: application/json" header in every POST or PUT request
+Use "x-auth-token" header in authenticated request
+
+/**
+  * Auth Endpoint
+  */
+POST /auth/login
+{
+  user: { type: String  }
+  pass: { type: String  }
+}
+
+Below all following Requests required x-auth-token in headers
+/**
+  * User change password
+  */
+PUT /changepass
+{
+currpass: { type: String  },
+newpass1: { type: String  },
+newpass2: { type: String  },
+}
+
+/**
+  * Users
+  */
+GET /alluser
+    /listuser
+POST /user
+{
+  name: { type: String  },
+  user: { type: String  },
+  pass: { type: String  },
+  token: { type: String },
+  isAdmin: { type: Boolean },
+}
+
+DELETE /user/:id
+
+GET user/:id
+
+/**
+  * Audi
+  */
+GET /listaudi
+
+POST /audi
+{
+  audi: { type: String }
+}
+
+GET /audi/:id/requests
+
+DELETE /audi/:id
+
+GET /audi/:id
+
+/**
+  * Requests
+  */
+GET /allreq
+
+GET /listreq
+
+POST /request
+{
+  name: { type: String  },
+  dept: { type: String  },
+  audi_id: { type: Number },
+  reason: { type: String },
+  created_by: { type: String},
+  approved: { type: Boolean },
+  date: { type: Date },
+  stime: { type: Number  },
+  etime: { type: Number  },
+}
+
+PUT /request/:id
+
+DELETE /request/:id
+
+GET /request/:id
+
+GET /request/delold
+
+/**
+  * Logout
+  */
+GET /logout
