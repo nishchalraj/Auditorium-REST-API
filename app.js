@@ -7,7 +7,6 @@ const config = require('./config'),
  mongoose = require('mongoose'),
  restifyPlugins = require('restify-plugins'),
  fs = require("fs"),
- ObjectId = mongoose.Types.ObjectId,
  jwt = require("jsonwebtoken");
  
  
