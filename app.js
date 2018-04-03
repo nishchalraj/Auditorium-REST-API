@@ -126,7 +126,7 @@ server.get('/', function indexHTML(req, res, next) {
 });
 
 /**
-  * User Login
+  * User Auth Endpoint
   */
 server.post("/auth/login",auth.authUser);
 

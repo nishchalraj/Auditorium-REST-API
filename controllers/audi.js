@@ -51,7 +51,7 @@ exports.viewApproveRequest = function(req, res, next) {
 				new errors.InvalidContentError("Expects 'id' parameter")
 			);
 	}
-    Request.find({ audi_id : req.params.id , approval : 1 } , function(err, audi) {
+    Request.find({ audi_id : req.params.id , approved : 1 } , function(err, audi) {
         if (err){
         return next(
 				new errors.InternalServerError("AUDI ID not found") //500

@@ -25,7 +25,7 @@ exports.allRequest = function(req, res, next) {
 };
 
 exports.listRequest = function(req, res, next) {
-    Request.find({approval : true}, function(err, request) {
+    Request.find({approved : true}, function(err, request) {
         if (err){
         return next(
 				new errors.InternalServerError("Request ID not found") //500
@@ -46,7 +46,7 @@ exports.createRequest = function(req, res, next) {
 				new errors.InvalidContentError("Expects 'application/json'")
 			);
 	}
-	if (req.params.approved == 1 && !req.Admin ) {
+	if (req.params.approved == 1 && !req.Admin) {
 			return next(
 				new errors.InvalidContentError("Wow! You are awesome you got it.")
 			);
@@ -134,7 +134,7 @@ exports.delOldRequests  = function(req, res, next) {
 				new errors.UnauthorizedError("You are not admin")
 			);
     }
-    Request.deleteMany({ approval : 1 , date: { $it: "DATE HERE" } }, function(err, request) {
+    Request.deleteMany({ approved : 1 , date: { $it: "DATE HERE" } }, function(err, request) {
         if (err){
         return next(
 				new errors.InternalServerError("We got errors") //500
