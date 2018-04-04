@@ -72,7 +72,7 @@ var User = require('./models/user');
   * Token Verifier Middleware
   */
 function verifyToken(req, res, next) {
-    
+    console.log(req.headers['x-auth-token'])
   var token = req.headers['x-auth-token'];
   if (!token){
      return next(
@@ -103,7 +103,7 @@ function verifyToken(req, res, next) {
     next();
     
     });
-  });console.log(res)
+  });
 }
  
 
