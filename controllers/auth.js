@@ -9,9 +9,9 @@ exports.authUser = function(req, res,next) {
 				new errors.InvalidContentError("Expects 'application/json'")
 			);
 	  }
-	  if(!req.params.user && req.params.pass) {
+	  if(!req.params.user && !req.params.pass) {
 			return next(
-				new errors.InvalidContentError("Expects username and password")
+				new errors.UnauthorizedError("Expects username and password")
 			);
 	  }
   // find the user
@@ -20,12 +20,16 @@ exports.authUser = function(req, res,next) {
     if (err) throw err;
 
     if (!users) {
-      res.json({message: 'Authentication failed. User not found.' });
+      return next(
+				new errors.ForbiddenError("Authentication failed. User not found.")
+			);
     } else if (users) {
 
       // check if password matches
       if (users.pass != req.params.pass) {
-        res.json({message: 'Authentication failed. Wrong password.' });
+       return next(
+				new errors.ForbiddenError('Authentication failed. Wrong password.')
+			); 
       } else {
 
         // if user is found and password is right
