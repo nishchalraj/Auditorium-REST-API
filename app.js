@@ -7,13 +7,6 @@ const config = require('./config'),
  mongoose = require('mongoose'),
  restifyPlugins = require('restify-plugins'),
  fs = require("fs"),
- Logger = require('bunyan'),
- log = new Logger.createLogger({
-        name: 'app-name',
-        serializers: {
-            req: Logger.stdSerializers.req
-        }
-    }),
  jwt = require("jsonwebtoken");
  
  
@@ -23,10 +16,6 @@ const config = require('./config'),
 const server = restify.createServer({
         name: config.name,
         version: config.version,
-});
-server.pre(function (request, response, next) {
-    request.log.info({ req: request }, 'REQUEST');
-    next();
 });
 /**
   * Restify Plugins For Middleware 
@@ -85,11 +74,11 @@ function verifyToken(req, res, next) {
 				new errors.InternalServerError("Invalid Token provided") //500
 			); 
     }
-    /*if (!user) {
+    if (!user) {
       return next(
 				new errors.InvalidArgumentError("Invalid user")
 			);
-    }*/
+    }
   jwt.verify(token, cert, function(err, decoded) {
     if (err){
         return next(
