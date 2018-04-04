@@ -62,7 +62,7 @@ var User = require('./models/user');
   * Token Verifier Middleware
   */
 function verifyToken(req, res, next) {
-    console.log(req)
+    console.log(req.headers['x-auth-token'])
   var token = req.headers['x-auth-token'];
   if (!token){
      return next(
@@ -148,7 +148,7 @@ server.get({path: "/user/:id"} ,verifyToken , user.viewUser);
 /**
   * Audis
   */ 
-server.get("/listaudi" ,audi.listAudi);
+server.get("/listaudi" ,verifyToken ,audi.listAudi);
 server.post("/audi" ,verifyToken , audi.createAudi);
 server.get("/audi/:id/requests" ,verifyToken , audi.viewApproveRequest);
 //UPDATE server.put("/audi/:id",verifyToken, audi.viewAudi);
