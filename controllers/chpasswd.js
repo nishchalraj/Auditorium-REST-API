@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 exports.pass = function(req, res , next) {
     if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Expects 'application/json'")
+				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	  }
 	  if(!req.params.currpass && ( req.params.newpass1 != req.params.newpass2 )) {

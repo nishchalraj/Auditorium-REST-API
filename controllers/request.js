@@ -43,7 +43,7 @@ exports.listRequest = function(req, res, next) {
 exports.createRequest = function(req, res, next) {
     if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Expects 'application/json'")
+				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	}
 	if (req.params.approved == 1 && !req.Admin) {
@@ -66,7 +66,7 @@ exports.createRequest = function(req, res, next) {
 exports.viewRequest = function(req, res, next) {
     if (!req.params.id) {
 			return next(
-				new errors.InvalidContentError("Expects 'id' parameter")
+				new errors.InvalidContentError("Requires 'id' parameter")
 			);
 	}
     Request.findById(new ObjectId(req.params.id), function(err, request) {
@@ -87,7 +87,7 @@ exports.viewRequest = function(req, res, next) {
 exports.approveRequest = function(req, res, next) {
     if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Expects 'application/json'")
+				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	}
 	if(!req.Admin){
@@ -109,7 +109,7 @@ exports.approveRequest = function(req, res, next) {
 exports.deleteRequest = function(req, res, next) {
     if (!req.params.id) {
 			return next(
-				new errors.InvalidContentError("Expects 'id' parameter")
+				new errors.InvalidContentError("Requires 'id' parameter")
 			);
 	}
 	if(!req.Admin){

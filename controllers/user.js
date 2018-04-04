@@ -48,7 +48,7 @@ exports.listUser = function(req, res, next) {
 exports.createUser = function(req, res, next) {
     if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Expects 'application/json'")
+				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	}
 	if(!req.Admin){
@@ -71,7 +71,7 @@ exports.createUser = function(req, res, next) {
 exports.viewUser = function(req, res, next) {
     if (!req.params.id) {
 			return next(
-				new errors.InvalidContentError("Expects 'id' parameter")
+				new errors.InvalidContentError("Requires 'id' parameter")
 			);
 	}
 	if(!req.Admin){
@@ -97,12 +97,12 @@ exports.viewUser = function(req, res, next) {
 exports.updateUser = function(req, res, next) {
     if (!req.params.id) {
 			return next(
-				new errors.InvalidContentError("Expects 'id' parameter")
+				new errors.InvalidContentError("Requires 'id' parameter")
 			);
 	}
     if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Expects 'application/json'")
+				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	}
 	if(!req.Admin){
@@ -129,7 +129,7 @@ exports.updateUser = function(req, res, next) {
 exports.deleteUser = function(req, res, next) {
     if (!req.params.id) {
 			return next(
-				new errors.InvalidContentError("Expects 'id' parameter")
+				new errors.InvalidContentError("Requires 'id' parameter")
 			);
 	}
 	if(!req.Admin){

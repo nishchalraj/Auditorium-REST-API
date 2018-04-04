@@ -25,7 +25,7 @@ exports.listAudi = function(req, res, next) {
 exports.createAudi = function(req, res, next) {
     if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Expects 'application/json'")
+				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	}
 	if(!req.Admin){
@@ -48,7 +48,7 @@ exports.createAudi = function(req, res, next) {
 exports.viewApproveRequest = function(req, res, next) {
     if (!req.params.id) {
 			return next(
-				new errors.InvalidContentError("Expects 'id' parameter")
+				new errors.InvalidContentError("Requires 'id' parameter")
 			);
 	}
     Request.find({ audi_id : req.params.id , approved : 1 } , function(err, audi) {
@@ -69,7 +69,7 @@ exports.viewApproveRequest = function(req, res, next) {
 exports.viewAudi = function(req, res, next) {
     if (!req.params.id) {
 			return next(
-				new errors.InvalidContentError("Expects 'id' parameter")
+				new errors.InvalidContentError("Requires 'id' parameter")
 			);
 	}
     Audi.findById(new ObjectId(req.params.id), function(err, audi) {
@@ -90,12 +90,12 @@ exports.viewAudi = function(req, res, next) {
 exports.updateAudi = function(req, res, next) {
     if (!req.params.id) {
 			return next(
-				new errors.InvalidContentError("Expects 'id' parameter")
+				new errors.InvalidContentError("Requires 'id' parameter")
 			);
 	}
     if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Expects 'application/json'")
+				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	}
 	if(!req.Admin){
@@ -122,7 +122,7 @@ exports.updateAudi = function(req, res, next) {
 exports.deleteAudi = function(req, res, next) {
     if (!req.params.id) {
 			return next(
-				new errors.InvalidContentError("Expects 'id' parameter")
+				new errors.InvalidContentError("Requires 'id' parameter")
 			);
 	}
 	if(!req.Admin){

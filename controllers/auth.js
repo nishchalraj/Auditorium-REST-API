@@ -7,12 +7,12 @@ exports.authUser = function(req, res,next) {
   //var responsecode = 200;
     if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Expects 'application/json'")
+				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	  }
 	  if(!req.params.user && !req.params.pass) {
 			return next(
-				new errors.UnauthorizedError("Expects username and password")
+				new errors.UnauthorizedError("Requires username and password")
 			);
 	  }
   // find the user
