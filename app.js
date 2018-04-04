@@ -7,6 +7,13 @@ const config = require('./config'),
  mongoose = require('mongoose'),
  restifyPlugins = require('restify-plugins'),
  fs = require("fs"),
+ Logger = require('bunyan'),
+ log = new Logger.createLogger({
+        name: 'app-name',
+        serializers: {
+            req: Logger.stdSerializers.req
+        }
+    }),
  jwt = require("jsonwebtoken");
  
  
@@ -26,7 +33,10 @@ server.use(restifyPlugins.acceptParser(server.acceptable));
 server.use(restifyPlugins.queryParser({ mapParams: true }));
 server.use(restifyPlugins.fullResponse());
 server.use(restifyPlugins.throttle({burst:100,rate:50,ip:true}));
-
+server.pre(function (request, response, next) {
+    request.log.info({ req: request }, 'REQUEST');
+    next();
+});
 
 /**
   * Start Server, Connect to DB & Require Routes
