@@ -85,11 +85,11 @@ function verifyToken(req, res, next) {
 				new errors.InternalServerError("Invalid Token provided") //500
 			); 
     }
-    if (!user) {
+    /*if (!user) {
       return next(
 				new errors.InvalidArgumentError("Invalid user")
 			);
-    }
+    }*/
   jwt.verify(token, cert, function(err, decoded) {
     if (err){
         return next(
