@@ -24,7 +24,10 @@ const server = restify.createServer({
         name: config.name,
         version: config.version,
 });
-
+server.pre(function (request, response, next) {
+    request.log.info({ req: request }, 'REQUEST');
+    next();
+});
 /**
   * Restify Plugins For Middleware 
   */
@@ -33,10 +36,7 @@ server.use(restifyPlugins.acceptParser(server.acceptable));
 server.use(restifyPlugins.queryParser({ mapParams: true }));
 server.use(restifyPlugins.fullResponse());
 server.use(restifyPlugins.throttle({burst:100,rate:50,ip:true}));
-server.pre(function (request, response, next) {
-    request.log.info({ req: request }, 'REQUEST');
-    next();
-});
+
 
 /**
   * Start Server, Connect to DB & Require Routes
@@ -87,7 +87,7 @@ function verifyToken(req, res, next) {
     }
     if (!user) {
       return next(
-				new errors.InvalidContentError("Invalid user")
+				new errors.InvalidArgumentError("Invalid user")
 			);
     }
   jwt.verify(token, cert, function(err, decoded) {
