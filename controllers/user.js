@@ -30,7 +30,7 @@ exports.listUser = function(req, res, next) {
 				new errors.UnauthorizedError("You are not admin")
 			);
     }
-    User.find({isAdmin :false},{token : 0}, function(err, user) {
+    User.find({isAdmin :false},{pass: 0, isAdmin: 0, token: 0 }, function(err, user) {
         if (err){
         return next(
 				new errors.InternalServerError("USER ID not found") //500
