@@ -62,6 +62,7 @@ var User = require('./models/user');
   * Token Verifier Middleware
   */
 function verifyToken(req, res, next) {
+    console.log(req)
   var token = req.headers['x-auth-token'];
   if (!token){
      return next(
