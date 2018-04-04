@@ -46,9 +46,9 @@ exports.createRequest = function(req, res, next) {
 				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	}
-	if (req.params.approved == 1 && !req.Admin) {
+	if (req.params.approved && !req.Admin) {
 			return next(
-				new errors.InvalidContentError("Wow! You are awesome you got it.")
+				new errors.InvalidContentError("You are not admin")
 			);
 	}
     var requestModel = new Request(req.body);
@@ -140,7 +140,7 @@ exports.delOldRequests  = function(req, res, next) {
 				new errors.InternalServerError("We got errors") //500
 			); 
       } else {
-            res.json("Old Requests deleted successfully");
+            res.json({message: "Old Requests deleted successfully"});
         }
     });
 };
