@@ -53,6 +53,8 @@ exports.authUser = function(req, res,next) {
       }
     });
         // return the information including token as JSON
+        if(user.isAdmin)
+        res.status(201);
         res.json({token :token});
         
       }   
