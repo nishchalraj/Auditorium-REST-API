@@ -4,6 +4,7 @@ var jwt = require("jsonwebtoken"),
     fs = require("fs");
     
 exports.authUser = function(req, res,next) {
+  //var responsecode = 200;
     if (!req.is('application/json')) {
 			return next(
 				new errors.InvalidContentError("Expects 'application/json'")
@@ -52,9 +53,9 @@ exports.authUser = function(req, res,next) {
 			); 
       }
     });
-        // return the information including token as JSON
-        if(user.isAdmin)
+        if(users.isAdmin)
         res.status(201);
+        // return the information including token as JSON
         res.json({token :token});
         
       }   
