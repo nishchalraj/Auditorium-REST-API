@@ -16,7 +16,7 @@ exports.allRequest = function(req, res, next) {
 			); 
       } else {
             if (request) {
-                res.json({data :request});
+                res.json(request);
             } else {
                 res.json("Request Data not found");
             }
@@ -32,7 +32,7 @@ exports.listRequest = function(req, res, next) {
 			); 
       } else {
             if (request) {
-                res.json({data :request});
+                res.json(request);
             } else {
                 res.json("Request Data not found");
             }

@@ -28,7 +28,7 @@ server.use(restifyPlugins.throttle({burst:100,rate:50,ip:true}));
 
 
 /**
-  * Start Server, Connect to DB & Require Routes
+  * Start Server, Connect to DB
   */
 server.listen(config.port, () => {
         // establish connection to mongodb
@@ -90,7 +90,6 @@ function verifyToken(req, res, next) {
     req.username = decoded.user,
     req.Admin = decoded.isAdmin;
     next();
-    
     });
   });
 }

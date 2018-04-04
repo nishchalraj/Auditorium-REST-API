@@ -17,7 +17,7 @@ exports.allUser = function(req, res, next) {
 			); 
       } else {
             if (user) {
-                res.json({data:user});
+                res.json(user);
             } else {
                 res.json("User Data not found");
             }
@@ -37,7 +37,7 @@ exports.listUser = function(req, res, next) {
 			); 
       } else {
             if (user) {
-                res.json({data :user});
+                res.json(user);
             } else {
                 res.json("User Data not found");
             }
