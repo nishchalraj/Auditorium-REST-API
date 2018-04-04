@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
  ObjectId = mongoose.Types.ObjectId;
  
 exports.listAudi = function(req, res, next) {  
+    console.log(req)
     Audi.apiQuery(req.params,function(err, audi) {
 //    Audi.findOne({},function(err, audi) {
         if (err){
