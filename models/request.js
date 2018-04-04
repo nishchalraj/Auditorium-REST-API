@@ -9,9 +9,9 @@ const requestSchema = new Schema({
   reason: { type: String, required: true },
   created_by: { type: String, required: true , trim: true},
   approved: { type: Boolean, required: true },
-  date: { type: Date, default: Date.now ,required: true},
-  stime: { type: Number, default: (new Date()).getTime() , required: true},
-  etime: { type: Number, default: (new Date()).getTime() , required: true}
+  date: { type: Date , required: true},
+  stime: { type: Date , required: true},
+  etime: { type: Date , required: true}
 },
         { minimize: false ,versionKey: false}
 );
