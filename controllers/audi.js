@@ -67,7 +67,7 @@ exports.viewApproveRequest = function(req, res, next) {
 };
  
 exports.viewAudi = function(req, res, next) {
-    if (!req.params.id.length === 12) {
+    if (req.params.id.length != 12) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);
