@@ -69,7 +69,7 @@ exports.createUser = function(req, res, next) {
 };
  
 exports.viewUser = function(req, res, next) {
-    if (!req.params.id) {
+    if (req.params.id.length != 12) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);
@@ -95,7 +95,7 @@ exports.viewUser = function(req, res, next) {
 };
 
 exports.updateUser = function(req, res, next) {
-    if (!req.params.id) {
+    if (req.params.id.length != 12) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);
@@ -127,7 +127,7 @@ exports.updateUser = function(req, res, next) {
 };
  
 exports.deleteUser = function(req, res, next) {
-    if (!req.params.id) {
+    if (req.params.id.length != 12) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);

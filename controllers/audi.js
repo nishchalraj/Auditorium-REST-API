@@ -46,7 +46,7 @@ exports.createAudi = function(req, res, next) {
 };
 
 exports.viewApproveRequest = function(req, res, next) {
-    if (!req.params.id) {
+    if (req.params.id.length != 12) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);
@@ -88,7 +88,7 @@ exports.viewAudi = function(req, res, next) {
 };
 
 exports.updateAudi = function(req, res, next) {
-    if (!req.params.id) {
+    if (req.params.id.length != 12) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);
@@ -120,7 +120,7 @@ exports.updateAudi = function(req, res, next) {
 };
  
 exports.deleteAudi = function(req, res, next) {
-    if (!req.params.id) {
+    if (req.params.id.length != 12) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);
