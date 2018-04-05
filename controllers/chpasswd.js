@@ -6,12 +6,12 @@ var mongoose = require('mongoose'),
 exports.pass = function(req, res , next) {
     if (!req.is('application/json')) {
 			return next(
-				new errors.InvalidContentError("Requires 'Content-type: application/json'")
+				new errors.InvalidContentError("Expects 'application/json'")
 			);
 	  }
 	  if(!req.params.currpass && ( req.params.newpass1 != req.params.newpass2 )) {
 			return next(
-				new errors.InvalidContentError("Got stuck in an error")
+				new errors.InvalidCredentialsError("Got stuck in an error")
 			);
 	  }
   // find the user
@@ -23,7 +23,7 @@ exports.pass = function(req, res , next) {
     }
     if (user.pass != req.params.currpass) {
       return next(
-				new errors.InvalidContentError("You entered wrong password!")
+				new errors.InvalidCredentialsError("You entered wrong password!") //401
 			);
     }
       User.findOneAndUpdate({user: user.user}, { $set: { pass: req.params.newpass1 } }, { new: true }, function(err, users) {
@@ -32,8 +32,11 @@ exports.pass = function(req, res , next) {
 				new errors.InternalServerError("Got stuck in an error") //500
 			); 
       }
-      else 
+      else{ 
+        if(users.isAdmin)
+        res.status(201);
         res.json(users);
+      }
     });
 
   });
