@@ -51,6 +51,8 @@ exports.createRequest = function(req, res, next) {
 				new errors.InvalidContentError("You are not admin")
 			);
 	}
+	if(req.Admin)
+	req.body.approved = 1;
     var requestModel = new Request(req.body);
     requestModel.save(function(err, request) {
         if (err){

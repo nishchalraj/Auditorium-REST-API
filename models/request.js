@@ -7,8 +7,8 @@ const requestSchema = new Schema({
   dept: { type: String, required: true },
   audi_id: { type: Number, required: true , trim: true},
   reason: { type: String, required: true },
-  created_by: { type: String, required: true , trim: true},
-  approved: { type: Boolean, required: true },
+  created_by: { type: String },
+  approved: { type: Boolean, required: true ,default : 0 },
   date: { type: String , required: true},
   stime: { type: String , required: true},
   etime: { type: String , required: true}
