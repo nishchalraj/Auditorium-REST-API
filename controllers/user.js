@@ -60,7 +60,7 @@ exports.createUser = function(req, res, next) {
     userModel.save(function(err, user) {
         if (err){
         return next(
-				new errors.InternalServerError("USER ID not found") //500
+				new errors.InternalServerError(err) //500
 			); 
       } else {
             res.json(user);
@@ -82,7 +82,7 @@ exports.viewUser = function(req, res, next) {
     User.findById(new ObjectId(req.params.id), function(err, user) {
         if (err){
         return next(
-				new errors.InternalServerError("USER ID not found") //500
+				new errors.InternalServerError(err) //500
 			); 
       } else {
             if (user) {
@@ -114,7 +114,7 @@ exports.updateUser = function(req, res, next) {
     User.findByIdAndUpdate(new ObjectId(req.params.id), updatedUserModel, function(err, user) {
         if (err){
         return next(
-				new errors.InternalServerError("USER ID not found") //500
+				new errors.InternalServerError(err) //500
 			); 
       } else {
             if (user) {
@@ -140,7 +140,7 @@ exports.deleteUser = function(req, res, next) {
     User.findByIdAndRemove(new Object(req.params.id), function(err, user) {
         if (err){
         return next(
-				new errors.InternalServerError("USER ID not found") //500
+				new errors.InternalServerError(err) //500
 			); 
       } else {
             res.json("User: " + req.params.id + " deleted successfully");
