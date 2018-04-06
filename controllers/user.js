@@ -51,12 +51,11 @@ exports.createUser = function(req, res, next) {
 				new errors.InvalidContentError("Requires 'Content-type: application/json'")
 			);
 	}
-/*	if(!req.Admin){
+    if(!req.Admin){
         return next(
 				new errors.UnauthorizedError("You are not admin")
 			);
     }
-  */  
     console.log(req.body);
     var newUser = {
         name : req.body.name,
