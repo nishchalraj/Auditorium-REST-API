@@ -37,7 +37,7 @@ exports.createAudi = function(req, res, next) {
     audiModel.save(function(err, audi) {
         if (err){  
         return next(
-				new errors.InternalServerError("Error occured: " + err) //500
+				new errors.UnauthorizedError("Error occured: " + err) //500
 			); 
         } else {
             res.json(audi);
@@ -54,7 +54,7 @@ exports.viewApproveRequest = function(req, res, next) {
     Request.find({ audi_id : req.params.id , approved : 1 } , function(err, audi) {
         if (err){
         return next(
-				new errors.InternalServerError("AUDI ID not found") //500
+				new errors.InternalServerError(err) //500
 			); 
       } else {
             if (audi) {
