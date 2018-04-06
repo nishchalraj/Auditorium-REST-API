@@ -5,7 +5,7 @@ const mongooseStringQuery = require('mongoose-string-query');
 const requestSchema = new Schema({
   name: { type: String, required: true },
   dept: { type: String, required: true },
-  audi_id: { type: Number, required: true , trim: true},
+  audi_id: { type: String, required: true },
   reason: { type: String, required: true },
   created_by: { type: String },
   approved: { type: Boolean, required: true ,default : 0 },
