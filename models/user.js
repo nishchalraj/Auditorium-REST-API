@@ -6,7 +6,7 @@ var userSchema = new Schema({
   name: { type: String, required: true }, 
   user: { type: String, required: true, trim: true , unique: true }, 
   pass: { type: String, required: true },
-  token: { type: String , required: true , unique: true , default: "GIVEITATRY" },
+  token: { type: String , unique: true , default: "GIVEITATRY" },
   isAdmin: { type: Boolean, required: true ,default: 1 },
    
 },
