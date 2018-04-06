@@ -34,7 +34,6 @@ server.listen(config.port, () => {
         // establish connection to mongodb
         mongoose.Promise = global.Promise;
         mongoose.connect(config.db.uri, { useMongoClient: true });
-
         const db = mongoose.connection;
 
         db.on('error', (err) => {
@@ -61,13 +60,11 @@ var User = require('./models/user');
   * Token Verifier Middleware
   */
 function verifyToken(req, res, next) {
-    console.log(req.body)
-    console.log(req.headers)
-    console.log(req.headers['x-auth-token'])
+//    console.log(req.body);
   var token = req.headers['x-auth-token'];
   if (!token){
      return next(
-				new errors.UnauthorizedError("No token provided.") //403
+				new errors.UnauthorizedError("No token provided.")
 			); 
   }
   User.findOne({token: token}, function(err, user) {
@@ -87,7 +84,7 @@ function verifyToken(req, res, next) {
 				new errors.InternalServerError("Failed to authenticate token.") //500
 			); 
     }
-    // if everything good, save to request for use in controllers
+   
     req.userId = decoded._id,
     req.username = decoded.user,
     req.Admin = decoded.isAdmin;

@@ -67,7 +67,7 @@ exports.createRequest = function(req, res, next) {
 };
  
 exports.viewRequest = function(req, res, next) {
-    if (req.params.id.length != 12) {
+    if (req.params.id.length != 24) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);
@@ -88,7 +88,7 @@ exports.viewRequest = function(req, res, next) {
 };
 
 exports.approveRequest = function(req, res, next) {
-    if (req.params.id.length != 12) {
+    if (req.params.id.length != 24) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);
@@ -110,7 +110,7 @@ exports.approveRequest = function(req, res, next) {
 };
  
 exports.deleteRequest = function(req, res, next) {
-    if (req.params.id.length != 12) {
+    if (req.params.id.length != 24) {
 			return next(
 				new errors.InvalidContentError("Requires 'id' parameter")
 			);
