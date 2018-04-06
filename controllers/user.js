@@ -59,9 +59,9 @@ exports.createUser = function(req, res, next) {
     
     console.log(req.body);
     var newUser = {
-        name : req.body.rq.name,
-        pass : req.body.rq.pass,
-        user : req.body.rq.user
+        name : req.body.name,
+        pass : req.body.pass,
+        user : req.body.user
     }
     var userModel = new User(newUser);
     userModel.save(function(err, user) {
