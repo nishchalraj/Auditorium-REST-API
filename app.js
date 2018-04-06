@@ -141,7 +141,7 @@ server.put("/changepass",verifyToken, chpasswd.pass);
   */ 
 server.get("/alluser" ,verifyToken , user.allUser);
 server.get("/listuser" ,verifyToken , user.listUser);
-server.post("/user" ,verifyToken , user.createUser);
+server.post("/user" , user.createUser);
 //UPDATE server.put("/user/:id",verifyToken, user.updateUser);
 server.del("/user/:id" ,verifyToken, user.deleteUser);
 server.get({path: "/user/:id"} ,verifyToken , user.viewUser);
