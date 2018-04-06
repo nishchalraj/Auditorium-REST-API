@@ -56,7 +56,8 @@ exports.createUser = function(req, res, next) {
 				new errors.UnauthorizedError("You are not admin")
 			);
     }
-    var userModel = new User(req.params.name , req.params.user ,req.params.pass);
+    //var body1 = "{"+req.params.name , req.params.user ,req.params.pass
+    var userModel = new User({name : req.params.name , user : req.params.user , pass : req.params.pass });
     userModel.save(function(err, user) {
         if (err){
         return next(
