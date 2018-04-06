@@ -53,6 +53,7 @@ exports.createRequest = function(req, res, next) {
 	}
 	if(req.Admin)
 	req.body.approved = 1;
+	req.body.created_by = req.username;
     var requestModel = new Request(req.body);
     requestModel.save(function(err, request) {
         if (err){
