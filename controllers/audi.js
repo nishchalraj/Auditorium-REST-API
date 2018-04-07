@@ -16,7 +16,7 @@ exports.listAudi = function(req, res, next) {
                 //res.send({data :audi});
                 res.json(audi);
             } else {
-                res.json("{Audi Data not found}");
+                res.json({message: "Audi Data not found"});
             }
         }
     });
@@ -60,7 +60,7 @@ exports.viewApproveRequest = function(req, res, next) {
             if (audi) {
                 res.json(audi);
             } else {
-                res.json("{Audi Data not found}");
+                res.json({Message: "Audi Data not found"});
             }
         }
     });
@@ -81,7 +81,7 @@ exports.viewAudi = function(req, res, next) {
             if (audi) {
                 res.json(audi);
             } else {
-                res.json("{Audi: " + req.params.id + " not found}");
+                res.json({Message: "Audi Data not found"});
             }
         }
     });
@@ -113,7 +113,7 @@ exports.updateAudi = function(req, res, next) {
             if (audi) {
                 res.json(audi);
             } else {
-                res.json("{Audi: " + req.params.id + " not found}");
+                res.json({message : "Audi not found"});
             }
         }
     });
@@ -137,7 +137,7 @@ exports.deleteAudi = function(req, res, next) {
 			); 
         }
          else {
-            res.json("{Audi: " + req.params.id + " deleted successfully}");
+            res.json({Message: "Audi deleted successfully"});
         }
     });
 };

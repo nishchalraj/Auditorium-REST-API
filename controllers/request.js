@@ -18,7 +18,7 @@ exports.allRequest = function(req, res, next) {
             if (request) {
                 res.json(request);
             } else {
-                res.json("{message: Request Data not found}");
+                res.json({Message: "Request Data not found"});
             }
         }
     });
@@ -34,7 +34,7 @@ exports.listRequest = function(req, res, next) {
             if (request) {
                 res.json(request);
             } else {
-                res.json("{message: Request Data not found}");
+                res.json({Message: "Request Data not found"});
             }
         }
     });
@@ -81,7 +81,7 @@ exports.viewRequest = function(req, res, next) {
             if (request) {
                 res.json(request);
             } else {
-                res.json("{message: Request: " + req.params.id + " not found}");
+                res.json({message: "Request not found"});
             }
         }
     });
@@ -126,7 +126,7 @@ exports.deleteRequest = function(req, res, next) {
 				new errors.InternalServerError("Request ID not found") //500
 			); 
       } else {
-            res.json("{Request: " + req.params.id + " deleted successfully}");
+            res.json({message: "Request deleted successfully"});
         }
     });
 };
