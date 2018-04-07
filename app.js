@@ -17,6 +17,7 @@ const server = restify.createServer({
         name: config.name,
         version: config.version,
 });
+
 /**
   * Restify Plugins For Middleware 
   */
@@ -60,7 +61,6 @@ var User = require('./models/user');
   * Token Verifier Middleware
   */
 function verifyToken(req, res, next) {
-//    console.log(req.body);
   var token = req.headers['x-auth-token'];
   if (!token){
      return next(
@@ -78,16 +78,15 @@ function verifyToken(req, res, next) {
 				new errors.InvalidArgumentError("Invalid user")
 			);
     }
-  jwt.verify(token, cert, function(err, decoded) {
+  jwt.verify(token, cert, function(err, verified) {
     if (err){
         return next(
 				new errors.InternalServerError("Failed to authenticate token.") //500
 			); 
     }
-   
-    req.userId = decoded._id,
-    req.username = decoded.user,
-    req.Admin = decoded.isAdmin;
+    req.userId = verified._id,
+    req.username = verified.user,
+    req.Admin = verified.isAdmin;
     next();
     });
   });
@@ -115,7 +114,6 @@ server.get('/', function indexHTML(req, res, next) {
             next(err);
             return;
         }
-
         res.setHeader('Content-Type', 'text/html');
         res.writeHead(200);
         res.end(data);
@@ -136,36 +134,36 @@ server.put("/changepass",verifyToken, chpasswd.pass);
 /**
   * Users
   */ 
-server.get("/alluser" ,verifyToken , user.allUser);
-server.get("/listuser" ,verifyToken , user.listUser);
-server.post("/user" ,verifyToken , user.createUser);
-//UPDATE server.put("/user/:id",verifyToken, user.updateUser);
-server.del("/user/:id" ,verifyToken, user.deleteUser);
-server.get({path: "/user/:id"} ,verifyToken , user.viewUser);
+server.get("/alluser" ,verifyToken ,user.allUser);
+server.get("/listuser" ,verifyToken ,user.listUser);
+server.post("/user" ,verifyToken ,user.createUser);
+//UPDATE server.put("/user/:id" ,verifyToken ,user.updateUser);
+server.del("/user/:id" ,verifyToken ,user.deleteUser);
+server.get({path: "/user/:id"} ,verifyToken ,user.viewUser);
 
 /**
   * Audis
   */ 
 server.get("/listaudi" ,verifyToken ,audi.listAudi);
-server.post("/audi" ,verifyToken , audi.createAudi);
-server.get("/audi/:id/requests" ,verifyToken , audi.viewApproveRequest);
-//UPDATE server.put("/audi/:id",verifyToken, audi.viewAudi);
-server.del("/audi/:id" ,verifyToken , audi.deleteAudi);
-server.get("/audi/:id" ,verifyToken , audi.viewAudi);
+server.post("/audi" ,verifyToken ,audi.createAudi);
+server.get({path: "/audi/:id/requests"} ,verifyToken ,audi.viewApproveRequest);
+//UPDATE server.put("/audi/:id" ,verifyToken , audi.updateAudi);
+server.del("/audi/:id" ,verifyToken ,audi.deleteAudi);
+server.get("/audi/:id" ,verifyToken ,audi.viewAudi);
 
 
 /**
   * Requests
   */ 
-server.get("/allreq",verifyToken, request.allRequest);  
-server.get("/listreq",verifyToken, request.listRequest);
-server.post("/request",verifyToken, request.createRequest);
-server.put("/request/:id",verifyToken, request.approveRequest);
-server.del("/request/:id",verifyToken, request.deleteRequest);
-server.get({path: "/request/:id"},verifyToken, request.viewRequest);
-server.get("/request/delold",verifyToken, request.delOldRequests);
+server.get("/allreq" ,verifyToken ,request.allRequest);  
+server.get("/listreq" ,verifyToken ,request.listRequest);
+server.post("/request" ,verifyToken ,request.createRequest);
+server.put("/request/:id" ,verifyToken ,request.approveRequest);
+server.del("/request/:id" ,verifyToken ,request.deleteRequest);
+server.get({path: "/request/:id"} ,verifyToken ,request.viewRequest);
+server.get("/request/delold" ,verifyToken ,request.delOldRequests);
  
 /**
   * Logout
   */ 
-server.get('/logout',verifyToken, logout.logout);
+server.get('/logout' ,verifyToken ,logout.logout);

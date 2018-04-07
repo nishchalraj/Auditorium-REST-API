@@ -6,7 +6,6 @@ var mongoose = require('mongoose'),
  
 exports.listAudi = function(req, res, next) {  
     Audi.apiQuery(req.params,function(err, audi) {
-//    Audi.findOne({},function(err, audi) {
         if (err){
         return next(
 				new errors.InternalServerError("Error occured: " + err) //500

@@ -4,7 +4,6 @@ var jwt = require("jsonwebtoken"),
     fs = require("fs");
     
 exports.authUser = function(req, res,next) {
-  //var responsecode = 200;
     if (!req.is('application/json')) {
 			return next(
 				new errors.InvalidContentError("Requires 'Content-type: application/json'")
@@ -15,11 +14,12 @@ exports.authUser = function(req, res,next) {
 				new errors.UnauthorizedError("Requires username and password")
 			);
 	  }
-  // find the user
     User.findOne({user: req.params.user}, function(err, users) {
-
-    if (err) throw err;
-
+    if (err){ 
+      return next(
+				new errors.InternalServerError("We got stuck in an error")
+			);
+    }
     if (!users) {
       return next(
 				new errors.ForbiddenError("Authentication failed. User not found.")
