@@ -19,7 +19,7 @@ exports.allUser = function(req, res, next) {
             if (user) {
                 res.json(user);
             } else {
-                res.json("User Data not found");
+                res.json("{message: User Data not found}");
             }
         }
     });
@@ -39,7 +39,7 @@ exports.listUser = function(req, res, next) {
             if (user) {
                 res.json(user);
             } else {
-                res.json("User Data not found");
+                res.json("{message: User Data not found}");
             }
         }
     });
@@ -94,7 +94,7 @@ exports.viewUser = function(req, res, next) {
             if (user) {
                 res.json(user);
             } else {
-                res.json("User: " + req.params.id + " not found");
+                res.json("{message: User: " + req.params.id + " not found}");
             }
         }
     });
@@ -126,7 +126,7 @@ exports.updateUser = function(req, res, next) {
             if (user) {
                 res.json(user);
             } else {
-                res.json("User: " + req.params.id + " not found");
+                res.json("{User: " + req.params.id + " not found}");
             }
         }
     });
@@ -149,7 +149,7 @@ exports.deleteUser = function(req, res, next) {
 				new errors.InternalServerError(err) //500
 			); 
       } else {
-            res.json("User: " + req.params.id + " deleted successfully");
+            res.json("{User: " + req.params.id + " deleted successfully}");
         }
     });
 };
