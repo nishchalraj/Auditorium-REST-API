@@ -65,13 +65,14 @@ exports.createRequest = function(req, res, next) {
                 //dark magic begins
                 var date = req.body.date +" "+req.body.etime;
                 date = moment(date); 
-                date = date.tz('Asia/Calcutta').format("YYYY-MM-DDTHH:MM:ss");
+                //date = date.tz('Asia/Calcutta').format("YYYY-MM-DDTHH:MM:ss");
+                date = date.tz('America/New_York').format("YYYY-MM-DDTHH:MM:ss");
                 req.body.expireAt = new Date(date);
 	            if(req.Admin)
 	            req.body.approved = 1;
 	            req.body.created_by = req.username;
                 var requestModel = new Request(req.body);
-                console.log(Date.now())
+                console.log(Date.now());
                 requestModel.save(function(err, request) {
                 if (err){
                 return next(
