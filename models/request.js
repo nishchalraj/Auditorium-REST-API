@@ -9,6 +9,7 @@ const requestSchema = new Schema({
   audi_name: { type: String },
   reason: { type: String, required: true },
   created_by: { type: String },
+  expireAt: {type: Date},
   approved: { type: Boolean , default : 0 },
   date: { type: String , required: true},
   stime: { type: String , required: true},

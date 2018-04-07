@@ -45,6 +45,8 @@ server.listen(config.port, () => {
         db.once('open', () => {
             console.log(`Server is listening on port ${config.port}`);
         });
+        
+        db.requests.createIndex( { "expireAt": 1 }, { expireAfterSeconds: 0 } );
 });
 
 /**
