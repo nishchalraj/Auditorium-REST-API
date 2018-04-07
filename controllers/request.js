@@ -71,10 +71,11 @@ exports.createRequest = function(req, res, next) {
 	            req.body.approved = 1;
 	            req.body.created_by = req.username;
                 var requestModel = new Request(req.body);
+                console.log(Date.now())
                 requestModel.save(function(err, request) {
                 if (err){
                 return next(
-				    new errors.InternalServerError("Request ID not found") //500
+				    new errors.InternalServerError("We stuck in an error") //500
 			    ); 
                 } else {
                     res.json(request);
