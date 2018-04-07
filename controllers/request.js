@@ -66,8 +66,8 @@ exports.createRequest = function(req, res, next) {
                 var date = req.body.date +" "+req.body.etime;
                 date = moment(date); 
                 //date = date.tz('Asia/Calcutta').format("YYYY-MM-DDTHH:MM:ss");
-                date = date.tz('America/New_York').format("YYYY-MM-DDTHH:MM:ss");
-                req.body.expireAt =  Date.now();
+                date = date.tz('UTC').format("YYYY-MM-DDTHH:MM:ss");
+                req.body.expireAt = new Date(date);
 	            if(req.Admin)
 	            req.body.approved = 1;
 	            req.body.created_by = req.username;
