@@ -4,14 +4,14 @@ var mongoose = require('mongoose'),
     ObjectId = mongoose.Types.ObjectId;
     
 exports.pass = function(req, res , next) {
-    if (!req.is('application/json')) {
+  if (!req.is('application/json')) {
 			return next(
 				new errors.InvalidContentError("Expects 'application/json'")
 			);
 	  }
-	  if(!req.params.currpass && ( req.params.newpass1 != req.params.newpass2 )) {
+	 if(!req.params.currpass && ( req.params.newpass1 != req.params.newpass2 )) {
 			return next(
-				new errors.InvalidCredentialsError("Got stuck in an error")
+				new errors.InvalidCredentialsError("Check your request")
 			);
 	  }
   // find the user

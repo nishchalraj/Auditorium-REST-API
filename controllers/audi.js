@@ -130,7 +130,7 @@ exports.deleteAudi = function(req, res, next) {
 				new errors.UnauthorizedError("You are not admin")
 			);
     }
-    Audi.findByIdAndRemove(new Object(req.params.id), function(err, audi) {
+    Audi.findByIdAndRemove(new Object(req.params.id), function(err, useless) {
         if (err){
         return next(
 				new errors.InternalServerError("Error occured: " + err) //500

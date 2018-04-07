@@ -120,13 +120,13 @@ exports.deleteRequest = function(req, res, next) {
 				new errors.UnauthorizedError("You are not admin")
 			);
     }
-    Request.findByIdAndRemove(new Object(req.params.id), function(err, request) {
+    Request.findByIdAndRemove(new Object(req.params.id), function(err, useless) {
         if (err){
         return next(
 				new errors.InternalServerError("Request ID not found") //500
 			); 
       } else {
-            res.json("Request: " + req.params.id + " deleted successfully");
+            res.json("{Request: " + req.params.id + " deleted successfully}");
         }
     });
 };
@@ -137,7 +137,7 @@ exports.delOldRequests  = function(req, res, next) {
 				new errors.UnauthorizedError("You are not admin")
 			);
     }
-    Request.deleteMany({ approved : 1 , date: { $it: Date.now } }, function(err, request) {
+    Request.deleteMany({ approved : 1 , date: { $it: Date.now } }, function(err, useless) {
         if (err){
         return next(
 				new errors.InternalServerError("We got errors") //500
