@@ -1,15 +1,17 @@
 var mongoose = require('mongoose'),
     errors = require('restify-errors'),
     Request = require('../models/request'),
+    Audi = require('../models/audi'),
     ObjectId = mongoose.Types.ObjectId;
 
-exports.allRequest = function(req, res, next) {
+exports.pendingRequest = function(req, res, next) {
     if(!req.Admin){
         return next(
 				new errors.UnauthorizedError("You are not admin")
 			);
     }
-    Request.find({}, function(err, request) {
+    //Request.find({}, function(err, request) {
+    Request.find({approved : false}, function(err, request) {
         if (err){
         return next(
 				new errors.InternalServerError("Request ID not found") //500
@@ -51,6 +53,19 @@ exports.createRequest = function(req, res, next) {
 				new errors.InvalidContentError("You are not admin")
 			);
 	}
+	Audi.findById(new ObjectId(req.params.audi_id), function(err, audi) {
+        if (err){
+        return next(
+				new errors.InternalServerError("Audi ID not found") //500
+			); 
+      } else {
+            if (audi) {
+                req.body.audi_name = audi.audi;
+            } else {
+                res.InternalServerError({message: "No audi name found"});
+            }
+        }
+    });
 	if(req.Admin)
 	req.body.approved = 1;
 	req.body.created_by = req.username;

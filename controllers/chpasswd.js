@@ -14,7 +14,6 @@ exports.pass = function(req, res , next) {
 				new errors.InvalidCredentialsError("Check your request")
 			);
 	  }
-  // find the user
   User.findOne(new ObjectId(req.userId), function(err, user) {
     if (err){
         return next(

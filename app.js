@@ -155,7 +155,7 @@ server.get("/audi/:id" ,verifyToken ,audi.viewAudi);
 /**
   * Requests
   */ 
-server.get("/allreq" ,verifyToken ,request.allRequest);  
+server.get("/allreq" ,verifyToken ,request.pendingRequest);  
 server.get("/listreq" ,verifyToken ,request.listRequest);
 server.post("/request" ,verifyToken ,request.createRequest);
 server.put("/request/:id" ,verifyToken ,request.approveRequest);
