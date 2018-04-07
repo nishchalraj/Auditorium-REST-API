@@ -57,12 +57,12 @@ exports.createUser = function(req, res, next) {
 			);
     }
     console.log(req.body);
-    var newUser = {
+    /*var newUser = {
         name : req.body.name,
         pass : req.body.pass,
         user : req.body.user
-    }
-    var userModel = new User(newUser);
+    }*/
+    var userModel = new User(req.body);
     userModel.save(function(err, user) {
         if (err){
         return next(
