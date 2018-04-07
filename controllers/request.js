@@ -54,7 +54,7 @@ exports.createRequest = function(req, res, next) {
 				new errors.InvalidContentError("You are not admin")
 			);
 	}
-	Audi.findById(new ObjectId(req.params.audi_id), function(err, audi) {
+	Audi.findOne(new ObjectId(req.params.audi_id), function(err, audi) {
         if (err){
         return next(
 				new errors.InternalServerError("Audi ID not found") //500
