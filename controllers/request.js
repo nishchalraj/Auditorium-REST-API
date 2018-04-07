@@ -59,28 +59,28 @@ exports.createRequest = function(req, res, next) {
         return next(
 				new errors.InternalServerError("Audi ID not found") //500
 			); 
-      } else {
+        } else {
             if (audi) {
                 req.body.audi_name = audi.audi;
-            //dark magic begins
-    var date = req.body.date +" "+req.body.stime;
-    date = moment(date); 
-    date = date.tz('Asia/Calcutta').format("YYYY-MM-DDTHH:MM:ss");
-    req.body.expireAt = new Date(date);
-	if(req.Admin)
-	req.body.approved = 1;
-	req.body.created_by = req.username;
-    var requestModel = new Request(req.body);
-    requestModel.save(function(err, request) {
-        if (err){
-        return next(
-				new errors.InternalServerError("Request ID not found") //500
-			); 
-      } else {
-            res.json(request);
-        }
-    });
-        } else {
+                //dark magic begins
+                var date = req.body.date +" "+req.body.stime;
+                date = moment(date); 
+                date = date.tz('Asia/Calcutta').format("YYYY-MM-DDTHH:MM:ss");
+                req.body.expireAt = new Date(date);
+	            if(req.Admin)
+	            req.body.approved = 1;
+	            req.body.created_by = req.username;
+                var requestModel = new Request(req.body);
+                requestModel.save(function(err, request) {
+                if (err){
+                return next(
+				    new errors.InternalServerError("Request ID not found") //500
+			    ); 
+                } else {
+                    res.json(request);
+                }
+                });
+            } else {
                 res.InternalServerError({message: "No audi name found"});
             }
         }
