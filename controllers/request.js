@@ -63,7 +63,7 @@ exports.createRequest = function(req, res, next) {
             if (audi) {
                 req.body.audi_name = audi.audi;
                 //dark magic begins
-                var date = req.body.date +" "+req.body.stime;
+                var date = req.body.date +" "+req.body.etime;
                 date = moment(date); 
                 date = date.tz('Asia/Calcutta').format("YYYY-MM-DDTHH:MM:ss");
                 req.body.expireAt = new Date(date);
