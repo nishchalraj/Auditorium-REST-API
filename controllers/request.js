@@ -54,7 +54,7 @@ exports.createRequest = function(req, res, next) {
 				new errors.InvalidContentError("You are not admin")
 			);
 	}
-	Audi.findOne(new ObjectId(req.params.audi_id), function(err, audi) {
+	Audi.findOne(new ObjectId(req.body.audi_id), function(err, audi) {
         if (err){
         return next(
 				new errors.InternalServerError("Audi ID not found") //500
@@ -62,12 +62,7 @@ exports.createRequest = function(req, res, next) {
       } else {
             if (audi) {
                 req.body.audi_name = audi.audi;
-            } else {
-                res.InternalServerError({message: "No audi name found"});
-            }
-        }
-    });
-    //dark magic begins
+            //dark magic begins
     var date = req.body.date +" "+req.body.stime;
     date = moment(date); 
     date = date.tz('Asia/Calcutta').format("YYYY-MM-DDTHH:MM:ss");
@@ -85,6 +80,12 @@ exports.createRequest = function(req, res, next) {
             res.json(request);
         }
     });
+        } else {
+                res.InternalServerError({message: "No audi name found"});
+            }
+        }
+    });
+    
 };
  
 exports.viewRequest = function(req, res, next) {
