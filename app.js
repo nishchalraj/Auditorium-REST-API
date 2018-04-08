@@ -53,6 +53,7 @@ server.listen(config.port, () => {
   * Let's generate new keys
   */
 const { exec } = require('child_process');
+
 exec('node keys.js', (err, stdout, stderr) => {
   if (err) {
     console.error(`exec error: ${err}`);
