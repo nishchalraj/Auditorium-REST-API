@@ -2,7 +2,7 @@ var jwt = require("jsonwebtoken"),
     errors = require('restify-errors'),
     User = require('../models/user'),
     fs = require("fs");
-    
+
 exports.authUser = function(req, res,next) {
     if (!req.is('application/json')) {
 			return next(
@@ -15,7 +15,7 @@ exports.authUser = function(req, res,next) {
 			);
 	  }
     User.findOne({user: req.params.user}, function(err, users) {
-    if (err){ 
+    if (err){
       return next(
 				new errors.InternalServerError("We got stuck in an error")
 			);
@@ -25,18 +25,12 @@ exports.authUser = function(req, res,next) {
 				new errors.ForbiddenError("Authentication failed. User not found.")
 			);
     } else if (users) {
-
-      // check if password matches
       if (users.pass != req.params.pass) {
        return next(
 				new errors.ForbiddenError('Authentication failed. Wrong password.')
-			); 
+			);
       } else {
-
-        // if user is found and password is right
-        // create a token with only our given payload
-        // we don't want to pass in the entire user since that has the password
-      var payload ={  
+      var payload ={
         _id: users._id,
         user: users.user,
         isAdmin: users.isAdmin
@@ -50,15 +44,14 @@ exports.authUser = function(req, res,next) {
       if (err){
         return next(
 				new errors.InternalServerError("Got stuck in an error") //500
-			); 
+			);
       }
     });
         if(users.isAdmin)
         res.status(201);
-        // return the information including token as JSON
-        res.json({token :token});
-        
-      }   
+        res.json({ token :token });
+
+      }
 
     }
 

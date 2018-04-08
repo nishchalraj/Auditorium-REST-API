@@ -8,8 +8,8 @@ const config = require('./config'),
  restifyPlugins = require('restify-plugins'),
  fs = require("fs"),
  jwt = require("jsonwebtoken");
- 
- 
+
+
 /**
   * Initialize Server
   */
@@ -19,7 +19,7 @@ const server = restify.createServer({
 });
 
 /**
-  * Restify Plugins For Middleware 
+  * Restify Plugins For Middleware
   */
 server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));
 server.use(restifyPlugins.acceptParser(server.acceptable));
@@ -45,7 +45,7 @@ server.listen(config.port, () => {
         db.once('open', () => {
             console.log(`Server is listening on port ${config.port}`);
         });
-        
+
         mongoose.connection.collections['requests'].createIndex( { "expireAt": 1 }, { expireAfterSeconds: 0 } );
 });
 
@@ -67,13 +67,13 @@ function verifyToken(req, res, next) {
   if (!token){
      return next(
 				new errors.UnauthorizedError("No token provided.")
-			); 
+			);
   }
   User.findOne({token: token}, function(err, user) {
     if (err){
         return next(
 				new errors.InternalServerError("Invalid Token provided") //500
-			); 
+			);
     }
     if (!user) {
       return next(
@@ -84,7 +84,7 @@ function verifyToken(req, res, next) {
     if (err){
         return next(
 				new errors.InternalServerError("Failed to authenticate token.") //500
-			); 
+			);
     }
     req.userId = verified._id,
     req.username = verified.user,
@@ -93,7 +93,7 @@ function verifyToken(req, res, next) {
     });
   });
 }
- 
+
 
 /**
   * Getting Controllers
@@ -104,8 +104,8 @@ var audi = require('./controllers/audi'),
     logout = require('./controllers/logout'),
     request = require('./controllers/request'),
     user = require('./controllers/user');
-    
-    
+
+
 
 /**
   * Landing Page
@@ -132,10 +132,10 @@ server.post("/auth/login",auth.authUser);
   * User change password
   */
 server.put("/changepass",verifyToken, chpasswd.pass);
- 
+
 /**
   * Users
-  */ 
+  */
 server.get("/alluser" ,verifyToken ,user.allUser);
 server.get("/listuser" ,verifyToken ,user.listUser);
 server.post("/user" ,verifyToken ,user.createUser);
@@ -145,7 +145,7 @@ server.get({path: "/user/:id"} ,verifyToken ,user.viewUser);
 
 /**
   * Audis
-  */ 
+  */
 server.get("/listaudi" ,verifyToken ,audi.listAudi);
 server.post("/audi" ,verifyToken ,audi.createAudi);
 server.get({path: "/audi/:id/requests"} ,verifyToken ,audi.viewApproveRequest);
@@ -156,15 +156,15 @@ server.get("/audi/:id" ,verifyToken ,audi.viewAudi);
 
 /**
   * Requests
-  */ 
-server.get("/allreq" ,verifyToken ,request.pendingRequest);  
+  */
+server.get("/allreq" ,verifyToken ,request.pendingRequest);
 server.get("/listreq" ,verifyToken ,request.listRequest);
 server.post("/request" ,verifyToken ,request.createRequest);
 server.put("/request/:id" ,verifyToken ,request.approveRequest);
 server.del("/request/:id" ,verifyToken ,request.deleteRequest);
 server.get({path: "/request/:id"} ,verifyToken ,request.viewRequest);
- 
+
 /**
   * Logout
-  */ 
+  */
 server.get('/logout' ,verifyToken ,logout.logout);
