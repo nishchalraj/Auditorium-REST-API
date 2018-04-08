@@ -50,6 +50,18 @@ server.listen(config.port, () => {
 });
 
 /**
+  * Let's generate new keys
+  */
+const { exec } = require('child_process');
+exec('node keys.js', (err, stdout, stderr) => {
+  if (err) {
+    console.error(`exec error: ${err}`);
+    return;
+  }
+  console.log(`Message: ${stdout}`);
+});
+
+/**
   * Obtaining Public Key
   */
 var cert = fs.readFileSync('./keys/public.pem');
@@ -80,7 +92,7 @@ function verifyToken(req, res, next) {
 				new errors.InvalidArgumentError("Invalid user")
 			);
     }
-  jwt.verify(token, cert, function(err, verified) {
+    jwt.verify(token, cert, function(err, verified) {
     if (err){
         return next(
 				new errors.InternalServerError("Failed to authenticate token.") //500
