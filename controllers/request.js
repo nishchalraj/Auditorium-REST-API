@@ -83,7 +83,7 @@ exports.createRequest = function(req, res, next) {
                 }
                 });
             } else {
-                res.errors.InternalServerError({message: "No audi name found"});
+                res.json({message: "No audi name found"});
             }
         }
     });
