@@ -163,7 +163,6 @@ server.post("/request" ,verifyToken ,request.createRequest);
 server.put("/request/:id" ,verifyToken ,request.approveRequest);
 server.del("/request/:id" ,verifyToken ,request.deleteRequest);
 server.get({path: "/request/:id"} ,verifyToken ,request.viewRequest);
-server.get("/request/delold" ,verifyToken ,request.delOldRequests);
  
 /**
   * Logout

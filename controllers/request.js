@@ -154,20 +154,3 @@ exports.deleteRequest = function(req, res, next) {
         }
     });
 };
-
-exports.delOldRequests  = function(req, res, next) {
-	if(!req.Admin){
-        return next(
-				new errors.UnauthorizedError("You are not admin")
-			);
-    }
-    Request.deleteMany({ approved : 1 , date: { $it: Date.now } }, function(err, useless) {
-        if (err){
-        return next(
-				new errors.InternalServerError("We got errors") //500
-			); 
-      } else {
-            res.json({message: "Old Requests deleted successfully"});
-        }
-    });
-};
